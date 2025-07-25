@@ -45,20 +45,20 @@ class MarketFeed:
         self._is_first_connect = True
         self.ws = None
         self.on_ticks = None
-        self.loop = asyncio.get_event_loop()
+        # self.loop = asyncio.get_event_loop()
         self.version = version
 
-    def run_forever(self):
+    async def run_forever(self):
         """Starts the WebSocket connection and runs the event loop."""
-        self.loop.run_until_complete(self.connect())
+        await self.connect()
 
-    def get_data(self):
+    async def get_data(self):
         """Fetch instruments data while the event loop is open."""
-        return self.loop.run_until_complete(self.get_instrument_data())
+        return await self.get_instrument_data()
 
-    def close_connection(self):
+    async def close_connection(self):
         """Close WebSocket connection with this."""
-        return self.loop.run_until_complete(self.disconnect())
+        return await self.disconnect()
 
     async def connect(self):
         """Initiates the connection to the Websockets."""
