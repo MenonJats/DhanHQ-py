@@ -86,11 +86,7 @@ class OrderUpdate:
 
         This method runs the asynchronous connect_order_update method in a new event loop.
         """
-        loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(loop)
         try:
-            loop.run_until_complete(self.connect_order_update())
+            return self.connect_order_update()
         except Exception as e:
             print(f"Error in connect_to_dhan_websocket: {e}")
-        finally:
-            loop.close()
